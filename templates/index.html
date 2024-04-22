@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Listings</title>
+    <style>
+        body {
+            background-color: rgb(90, 115, 175); 
+        }
+    </style>
+</head>
+<body>
+    <nav class="row" style="background-image: linear-gradient(to left,rgb(107, 47, 5),rgba(214, 15, 221, 0.726)); color: black;">
+        <div class="col-md-6 offset-md-3 col-lg-3 offset-lg-4 text-center">
+          <h1 style="font-size:xx-large;">JOB LISTINGS APP</h1>
+          <h5>Developed by Krupa 22112019</h5>
+        </div>
+      </nav>
+    {% for job in jobs %}
+        <div>
+            <h2>{{ job.title }}</h2>
+            <p>{{ job.description }}</p>
+            <h2>{{ job.company }}</h2>
+            <img src="{{ job.image.url }}" alt="{{ job.title }}" style="width: 500px; height: auto;">
+            <form action="{% url 'delete_job' job.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    {% endfor %}
+    <a href="{% url 'upload' %}">Upload Job</a>
+</body>
+</html>
